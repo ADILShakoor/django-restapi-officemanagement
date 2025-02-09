@@ -10,3 +10,4 @@ urlpatterns = [
     path("delete_asset/<int:asset_id>", views.delete_asset,name='delete_asset')
 
 ]
+ 

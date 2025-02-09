@@ -8,10 +8,10 @@ venv/
 .env
 
 # Django Specific
-db.sqlite3  # Ignore SQLite database (remove if using PostgreSQL/MySQL)
-media/      # Ignore uploaded media files (optional)
-staticfiles/ # Ignore collected static files (optional)
-*.log       # Ignore log files
+db.sqlite3  
+media/      
+staticfiles/ 
+*.log       
 *.pot
 *.pyc
 *.swp
@@ -24,12 +24,12 @@ staticfiles/ # Ignore collected static files (optional)
 
 # Django Secrets & Config Files
 .env
-config/settings_local.py  # If using local settings for development
-secrets.json  # Ignore any secret keys stored in JSON format
+config/settings_local.py  
+secrets.json  
 
 # REST API Specific (Token Auth, Debugging, etc.)
-drf-yasg/  # If using Django REST Swagger/Yasg
-debug_toolbar/  # Ignore debug toolbar files
+drf-yasg/ 
+debug_toolbar/ 
 
 # VS Code and JetBrains IDEs
 .vscode/
