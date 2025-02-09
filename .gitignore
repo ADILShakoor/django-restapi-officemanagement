@@ -1,0 +1,41 @@
+# Python Bytecode Files
+__pycache__/
+*.py[cod]
+
+# Virtual Environment (Pipenv)
+Pipfile.lock
+venv/
+.env
+
+# Django Specific
+db.sqlite3  # Ignore SQLite database (remove if using PostgreSQL/MySQL)
+media/      # Ignore uploaded media files (optional)
+staticfiles/ # Ignore collected static files (optional)
+*.log       # Ignore log files
+*.pot
+*.pyc
+*.swp
+
+# Django Migrations (only ignore auto-generated cache files, not migrations themselves)
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# Django Secrets & Config Files
+.env
+config/settings_local.py  # If using local settings for development
+secrets.json  # Ignore any secret keys stored in JSON format
+
+# REST API Specific (Token Auth, Debugging, etc.)
+drf-yasg/  # If using Django REST Swagger/Yasg
+debug_toolbar/  # Ignore debug toolbar files
+
+# VS Code and JetBrains IDEs
+.vscode/
+.idea/
+
+# MacOS & Linux System Files
+.DS_Store
+
+
