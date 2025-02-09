@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Add/Edit Asset{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>{{ asset.id|default:"Add" }} Asset</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="{% url 'list_assets' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Company Records{% endblock %}
+
+{% block content %}
+<form method="get" action="{% url 'search_users' %}" class="d-flex">
+    <input type="text" name="q" class="form-control me-2" placeholder="Search  by username or role">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+<h2>Company Records</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Company</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in records %}
+        <tr>
+            <td>{{ record.username }}</td>
+            <td>{{ record.email }}</td>
+            <td>{{ record.get_role_display }}</td>
+            <td>{{record.company.name}}</td>
+            <td>
+                <a href="{% url 'edit_user' record.id  %}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="{% url 'delete_user' record.id  %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Search Users{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Search Users</h2>
+    <form method="get" action="{% url 'search_users' %}" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search by username or role" value="{{ query }}">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </form>
+
+    {% if users %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Company</th>
+                </tr>
+            </thead>
+            <tbody> 
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.get_role_display }}</td>
+                        <td>{{ user.company.name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No users found matching your search criteria.</p>
+    {% endif %}
+</div>
+{% endblock %}

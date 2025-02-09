@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Assign Employees{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Assign Employees to Project: {{ project.name }}</h2>
+
+    <!-- Display Already Assigned Employees -->
+    {% if project.assigned_employees.all %}
+    <div class="mb-4">
+        <h4>Already Assigned Employees:</h4>
+        <ul class="list-group">
+            {% for employee in project.assigned_employees.all %}
+                <li class="list-group-item">{{ employee.username }} ({{ employee.role }})</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+        <p>No employees have been assigned yet.</p>
+    {% endif %}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Assign Employees to Project: {{ project.name }}</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_assigned_employees" class="form-label">Select Employees</label>
+            {{ form.employee }}
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="{% url 'list_projects' %}" class="btn btn-secondary">Back to Projects</a>
+    </form>
+</div>
+{% endblock %}

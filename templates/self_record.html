@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}My Record{% endblock %}
+
+{% block content %}
+<h2>My Record</h2>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>   
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{ record.username }}</td>
+        <td>{{ record.email }}</td>
+        <td>{{ record.get_role_display }}</td>
+    </tr>
+    </tbody>
+    <td>  
+        <a href="{% url 'edit_user' record.id  %}" class="btn btn-sm btn-primary">Edit</a>
+        <a href="{% url 'delete_user' record.id  %}" class="btn btn-sm btn-danger">Delete</a>
+    </td>
+</table>
+<br>
+<!-- asset you owns -->
+<h2>ASSERTS</h2>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th> asset name</th>
+        <th>serial_number</th>
+        <th>status</th>
+        <th>maintenance_date</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% if assets %}
+            {% for asset in assets %}
+    <tr>
+        <td>{{ asset.name }}</td>
+        <td>{{ asset.serial_number }}</td>
+        <td>{{ asset.status }}</td>
+        <td>{{ asset.maintenance_date }}</td>
+        <td>{{ asset.description }}</td>
+
+    </tr>
+    <!-- {% empty %}
+        <tr>
+            <td colspan="5">No Asset is assigned</td>
+        </tr> -->
+     {% endfor %}
+     
+     <!-- {% else %}
+     <tr>
+        <td colspan="5">No Asset assigned to you Yet</td>
+    </tr>
+    {% endif %} -->
+    </tbody>
+</table>
+<br>
+ <!-- project related code -->
+  <br>
+  <h2>Projects you Assigned</h2>
+ <table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Company</th>
+            <th>Created By</th>
+            <th>Assigned Employees</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for project in projects %}
+        <tr>
+            <td>{{ project.name }}</td>
+            <td>{{ project.get_status_display }}</td>
+            <td>{{ project.company.name }}</td>
+            <td>{{ project.created_by.username }}</td>
+            <td>
+                {% for emp in project.assigned_employees.all %}
+                    {{ emp.username }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No project is assigned</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<!-- task related data -->
+<h2>Tasks assigned you</h2>
+ <table class="table">
+    <thead>
+        <tr>
+                <th>Task</th>
+                <th>Descriptions</th>
+                <th>Project</th>
+                <th>Status</th>
+                <th>Weight</th>
+                <th>Assign TO</th>
+                <th>Due Date</th>
+                <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+            {% for task in taskes %}
+            <tr>
+                <td>{{ task.name }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.project.name }}</td>
+                <td><a href="{% url 'task-remarks' task.id %}">{{ task.get_status_display }}</a></td>
+                <td>{{ task.weight }}</td>
+                <td>{{task.assigned_to}}</td>
+                <td>{{ task.due_date }}</td>
+                <td>
+                    {% if task.image %}
+                    <a href="{{ task.image.url }}" target="_blank">
+                        <img src="{{ task.image.url }}" alt="Task Image" width="50"></a>
+                    {% else %}
+                        No Image
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+             <tr>
+            <td colspan="5">No project is assigned</td>
+             </tr>
+         {% endfor %}
+    </tbody>
+</table>
+
+<!-- assigned_project -->
+{% endblock %}
