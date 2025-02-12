@@ -6,7 +6,7 @@ from . import views
 urlpatterns = [
     # Login, Logout, and Account Creation URLs
     path('', views.create_account, name='create_account'),
-    path('login/', views.login_view, name='login'),
+    path('login/', views.login_view, name='django-login'),
     path('logout/', views.logout_view, name='logout'),
     path('search/', views.search_users, name='search_users'),
     path('manage_company_records/', views.manage_company_records, name='manage_company_records'),
