@@ -121,7 +121,7 @@ def create_account(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')  # Redirect to login page after successful account creation
+            return redirect('django-login')  # Redirect to login page after successful account creation
     else:
         form = CustomUserCreationForm()
     return render(request, 'create_account.html', {'form': form})
@@ -176,4 +176,4 @@ def search_users(request):
 @login_required
 def logout_view(request):
     logout(request)
-    return redirect('login') 
+    return redirect('django-login') 
