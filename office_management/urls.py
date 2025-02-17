@@ -25,6 +25,7 @@ urlpatterns = [
     path('asset/',include('my_asset.urls')),
     path('project/', include('project_management.urls')),
     path('api/', include('accountsAPI.urls')),  # API routes
+    path('assetapi/',include("assetsAPI.urls")),   #asset api routes
 ]
 
 if settings.DEBUG:
