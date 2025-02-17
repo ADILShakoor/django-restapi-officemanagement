@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+# roote url api/
 urlpatterns = [
     path("api-register/",views.RegisterUser.as_view()),
     path('login/', views.LoginView.as_view(), name='login'),
