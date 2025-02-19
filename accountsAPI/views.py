@@ -58,7 +58,7 @@ class UserObjPagination(PageNumberPagination):
     
 class UserListAPIView(generics.ListAPIView):
     throttle_classes=[AnonRateThrottle,UserRateThrottle]
-    pagination_class= UserObjPagination
+    pagination_class= UserObjPagination 
     # queryset = CustomUser.objects.select_related("company").all()
     filter_backends=[DjangoFilterBackend,SearchFilter,OrderingFilter]
     search_fields=['username','role']
