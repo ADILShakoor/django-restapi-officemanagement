@@ -50,7 +50,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
         # Update other fields
         updated_instance= super().update(instance, validated_data)
         # cache implementation
-        # Clear cached user list
+      
         cache.delete_pattern("user_list_*")  
 
         return updated_instance

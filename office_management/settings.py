@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'accountsAPI',
     'assetsAPI',
+    'project_mangAPI',
 ]
 
 MIDDLEWARE = [
