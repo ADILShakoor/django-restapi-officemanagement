@@ -26,7 +26,8 @@ urlpatterns = [
     path('project/', include('project_management.urls')),
     path('api/', include('accountsAPI.urls')),  # API routes
     path('assetapi/',include("assetsAPI.urls")),   #asset api routes
-    path("projectAPI/",include("project_mangAPI.urls"))
+    path("projectAPI/",include("project_mangAPI.urls")),
+    path('attendence/', include("attendence_management.urls")),
 ]
 
 if settings.DEBUG:

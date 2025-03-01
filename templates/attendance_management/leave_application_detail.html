@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Leave Application Details{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Leave Application Details</h1>
+    <div class="card shadow">
+        <div class="card-body">
+            <p><strong>Employee:</strong> {{ leave.employee.username }}</p>
+            <p><strong>Leave Type:</strong> {{ leave.leave_type }}</p>
+            <p><strong>Start Date:</strong> {{ leave.start_date }}</p>
+            <p><strong>End Date:</strong> {{ leave.end_date }}</p>
+            <p><strong>Status:</strong> {{ leave.status|capfirst }}</p>
+            <p><strong>Reason:</strong> {{ leave.reason }}</p>
+
+            <a href="{% url 'leave-application-update' leave.id %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'leave-application-delete' leave.id %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'leave-application-list' %}" class="btn btn-secondary">Back</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
