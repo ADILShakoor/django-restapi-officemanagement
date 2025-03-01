@@ -8,6 +8,7 @@ from .forms import SimpleLoginForm
 # from django.contrib.auth.forms import AuthenticationForm
 from .forms import CustomUserCreationForm ,CustomUserChangeForm 
 from project_management.models import Project,Task
+from datetime import date
 
 # Helper Functions
 
@@ -97,11 +98,13 @@ def view_self_record(request):
     record = get_object_or_404(CustomUser, id=request.user.id)
     assets=Asset.objects.filter(assigned_to=request.user.id)
     taskes=Task.objects.filter(assigned_to=request.user)
+    total_days=(date.today() - record.date_joined.date()).days
+    # join
     # if not assets.exists():
     #     message={
     #         "message":"NO asset is assigned to you"
     #     }
-    print(request.user)
+    # print(request.user)
     if request.user.role == 'team_lead':
         projects = Project.objects.filter(created_by=request.user)
     else:
@@ -111,7 +114,7 @@ def view_self_record(request):
     #         "message":"No Project is assigned to you"
     #     }
 
-    return render(request, 'self_record.html', {'record': record,'assets':assets,"projects":projects,'taskes':taskes})
+    return render(request, 'self_record.html', {"total_days":total_days,'record': record,'assets':assets,"projects":projects,'taskes':taskes})
 
 
 

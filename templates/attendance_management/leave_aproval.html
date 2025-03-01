@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Leave Approval {% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <form method="post" >
+        {% csrf_token %}
+        <label for="status"> Status </label>
+        {{ form.status }}
+        <button type="submit" class="btn btn-success"> Submit </button>
+        <a href="{% url 'leave-application-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}
+
+<!-- hhhhhh -->
+

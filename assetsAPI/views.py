@@ -38,8 +38,9 @@ class AssertView(viewsets.ViewSet):
     
     def list(self,request): 
         # get request for list of assets
+        user=self.request.user
         self.throttle_classes=[AnonRateThrottle,UserRateThrottle]
-        assets=Asset.objects.filter(company=self.request.user.company)
+        assets=Asset.objects.filter(company=user.company)
         perpage=self.request.query_params.get("perpage",default=3)
         page=self.request.query_params.get("page",default=1)
         search=self.request.query_params.get("search")
