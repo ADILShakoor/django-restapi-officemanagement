@@ -90,7 +90,7 @@ def projects_detail(request,project_id):
     # user_tasks = Task.objects.filter(project__in=user_projects)
     return render(request, 'project_management/project_detail.html', {'user_tasks': user_tasks})
 
-def task_remarks(request,task_id):
+def task_remarks(request,task_id): 
     task=get_object_or_404(Task,id=task_id)
     if request.method=='POST':
         form=TaskRemarkform(request.POST, instance=task)

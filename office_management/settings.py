@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'accountsAPI',
     'assetsAPI',
     'project_mangAPI',
+    'attendence_management',
 ]
 
 MIDDLEWARE = [

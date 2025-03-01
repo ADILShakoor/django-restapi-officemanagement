@@ -3,13 +3,14 @@
 {% block title %}My Record{% endblock %}
 
 {% block content %}
-<h2>My Record</h2>
+<h2>My Record </h2> <p> {{ record.username }} you have {{total_days}} days at {{record.company}} </p>
 <table class="table table-bordered">
     <thead>
     <tr>
         <th>Username</th>
         <th>Email</th>
-        <th>Role</th>   
+        <th>Role</th> 
+        <th>Actions</th> 
     </tr>
     </thead>
     <tbody>
@@ -17,12 +18,13 @@
         <td>{{ record.username }}</td>
         <td>{{ record.email }}</td>
         <td>{{ record.get_role_display }}</td>
+        <td>  
+            <a href="{% url 'edit_user' record.id  %}" class="btn btn-sm btn-primary">Edit</a>
+            <a href="{% url 'delete_user' record.id  %}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
     </tr>
     </tbody>
-    <td>  
-        <a href="{% url 'edit_user' record.id  %}" class="btn btn-sm btn-primary">Edit</a>
-        <a href="{% url 'delete_user' record.id  %}" class="btn btn-sm btn-danger">Delete</a>
-    </td>
+    
 </table>
 <br>
 <!-- asset you owns -->
