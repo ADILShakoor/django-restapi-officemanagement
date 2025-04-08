@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "dashboard.html" %}
 
 {% block title %}Task Remarks{% endblock %}
 
@@ -8,5 +8,7 @@
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Submit Task Remarks</button>
+    <a href="{% url 'view_self_taskes' %}" class="btn btn-secondary">Cancel</a>
+
 </form>
 {% endblock %}

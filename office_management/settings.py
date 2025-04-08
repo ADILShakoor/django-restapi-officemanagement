@@ -43,11 +43,12 @@ INSTALLED_APPS = [
     'my_app',
     'my_asset',
     'project_management',
-    'rest_framework',
+    'rest_framework', 
     'accountsAPI',
     'assetsAPI',
     'project_mangAPI',
     'attendence_management',
+    "attendence_managementAPI",
 ]
 
 MIDDLEWARE = [

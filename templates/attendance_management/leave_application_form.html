@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "dashboard.html" %}
 
 {% block title %}Apply for Leave{% endblock %}
 
@@ -26,7 +26,7 @@
                     {{ form.reason }}
                 </div>
                 <button type="submit" class="btn btn-success">Submit</button>
-                <a href="{% url 'leave-application-list' %}" class="btn btn-secondary">Cancel</a>
+                <a href="{% url 'view_self_leaves' %}" class="btn btn-secondary">Cancel</a>
             </form>
         </div>
     </div>

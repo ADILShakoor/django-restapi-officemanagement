@@ -15,7 +15,7 @@ from .serializer import AssetSerializer
 from accountsAPI.permissions import CustomUserPermission
  
 
-class AssertViewGeneric(generics.ListCreateAPIView):
+class AssertViewGeneric(generics.ListCreateAPIView): 
     queryset=Asset.objects.all()
     serializer_class= AssetSerializer
     

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "dashboard.html" %}
 
 {% block title %}Manage Attendance{% endblock %}
 
@@ -13,9 +13,9 @@
         <button type="submit" class="btn btn-success">
             {% if form.instance.pk %}Update{% else %}Submit{% endif %}
         </button>
-        <a href="{% url 'attendance-list' %}" class="btn btn-secondary">Cancel</a>
+        <a href="{% url 'view_self_attendances' %}" class="btn btn-secondary">Cancel</a>
     </form>
     <!-- attendance-list -->
-    <a href="{% url 'attendance-list' %}" class="btn btn-secondary">Attence List</a>
+    <!-- <a href="{% url 'attendance-list' %}" class="btn btn-secondary">Attence List</a> -->
 </div>
 {% endblock %}

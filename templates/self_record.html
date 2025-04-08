@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "dashboard.html" %}
 
 {% block title %}My Record{% endblock %}
 
@@ -20,15 +20,16 @@
         <td>{{ record.get_role_display }}</td>
         <td>  
             <a href="{% url 'edit_user' record.id  %}" class="btn btn-sm btn-primary">Edit</a>
-            <a href="{% url 'delete_user' record.id  %}" class="btn btn-sm btn-danger">Delete</a>
+            <!-- <a href="{% url 'delete_user' record.id  %}" class="btn btn-sm btn-danger">Delete</a> -->
         </td>
     </tr>
     </tbody>
     
 </table>
 <br>
+
 <!-- asset you owns -->
-<h2>ASSERTS</h2>
+<!-- <h2>ASSERTS</h2>
 <table class="table table-bordered">
     <thead>
     <tr>
@@ -49,23 +50,24 @@
         <td>{{ asset.maintenance_date }}</td>
         <td>{{ asset.description }}</td>
 
-    </tr>
+    </tr> -->
     <!-- {% empty %}
         <tr>
             <td colspan="5">No Asset is assigned</td>
         </tr> -->
-     {% endfor %}
+     <!-- {% endfor %} -->
      
      <!-- {% else %}
      <tr>
         <td colspan="5">No Asset assigned to you Yet</td>
     </tr>
     {% endif %} -->
-    </tbody>
+    <!-- </tbody>
 </table>
-<br>
+<br> -->
+
  <!-- project related code -->
-  <br>
+  <!-- <br>
   <h2>Projects you Assigned</h2>
  <table class="table">
     <thead>
@@ -97,9 +99,10 @@
         {% endfor %}
     </tbody>
 </table>
-<br>
+<br> -->
+
 <!-- task related data -->
-<h2>Tasks assigned you</h2>
+<!-- <h2>Tasks assigned you</h2>
  <table class="table">
     <thead>
         <tr>
@@ -138,7 +141,88 @@
              </tr>
          {% endfor %}
     </tbody>
-</table>
+</table> -->
 
-<!-- assigned_project -->
+<!-- attendence mark -->
+
+<!-- <h2 class="mb-4">Attendance Records</h2>
+    <a href="{% url 'attendance-create' %}" class="btn btn-primary mb-3">Mark Attendance</a>  
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Employee</th>
+                <th>Date</th>
+                <th>company</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for attendance in attendances %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ attendance.employee.username }}</td>
+                <td>{{ attendance.date }}</td>
+                <td>{{ attendance.company}}</td>
+                <td><span class="badge bg-{% if attendance.status == 'present' %}success{% else %}danger{% endif %}">
+                    {{ attendance.status|title }}</span>
+                </td>
+                <td>
+                    <a href="{% url 'attendance-update' attendance.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'attendance-delete' attendance.id %}" class="btn btn-danger btn-sm">Delete</a>  
+                    
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No attendance records found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> -->
+
+    <!-- leave application list -->
+    <!-- <h1 class="mb-4">Leave Applications</h1>
+    <a href="{% url 'leave-application-create' %}" class="btn btn-primary mb-3">Apply for Leave</a>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Employee</th>
+                <th>Type</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead> 
+        <tbody>
+            {% for leave in leaves %}
+            <tr>
+                <td>{{ leave.id }}</td>
+                <td>{{ leave.employee.username }}</td>
+                <td>{{ leave.leave_type }}</td>
+                <td>{{ leave.start_date }}</td>
+                <td>{{ leave.end_date }}</td>
+                <td>
+                    <span class="badge {% if leave.status == 'approved' %}bg-success{% elif leave.status == 'rejected' %}bg-danger{% else %}bg-warning{% endif %}">
+                        <a href="{% url 'leave-applications-aprovel' leave.id %}">{{ leave.status|capfirst }}</a>
+                    </span>
+                </td>
+                <td>
+                   
+                    <a href="{% url 'leave-application-update' leave.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'leave-application-delete' leave.id %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center">No leave applications found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> -->
+
 {% endblock %}
+

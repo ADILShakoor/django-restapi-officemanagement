@@ -9,6 +9,7 @@ from .forms import SimpleLoginForm
 from .forms import CustomUserCreationForm ,CustomUserChangeForm 
 from project_management.models import Project,Task
 from datetime import date
+from attendence_management.models import Attendance,LeaveType,LeaveApplication
 
 # Helper Functions
 
@@ -92,29 +93,84 @@ def manage_team_records(request):
 
 
 # Employee View for Their Own Record
+
+@login_required
+def dashboard(request):
+    return render(request, 'dashboard.html')
+
+def view_self_asset(request):
+    assets=Asset.objects.filter(assigned_to=request.user.id)
+    context={
+        'assets':assets
+        }
+    return render(request, 'dashboard/self_asset.html',context)
+
+def view_self_taskes(request):
+    taskes=Task.objects.filter(assigned_to=request.user)
+    context={
+        'taskes':taskes
+        }
+    return render(request, 'dashboard/self_taskes.html',context)
+
+def view_self_attendances(request):
+    attendances=Attendance.objects.filter(employee=request.user.id)
+    context={
+        'attendances':attendances
+        }
+    return render(request, 'dashboard/self_attendances.html',context)
+
+def view_self_leaves(request):
+    leaves=LeaveApplication.objects.filter(employee=request.user.id)
+    context={
+        "leaves":leaves,
+        }
+    return render(request, 'dashboard/self_leaves.html',context)
+
+def view_self_projects(request):
+    if request.user.role == 'team_lead':
+        projects = Project.objects.filter(created_by=request.user)
+    else:
+       projects = Project.objects.filter(assigned_employees=request.user)
+    context={
+        "projects":projects,
+        }
+    return render(request, 'dashboard/self_projects.html',context)
+
+
 @login_required
 # @user_passes_test(is_employee)
 def view_self_record(request):
     record = get_object_or_404(CustomUser, id=request.user.id)
-    assets=Asset.objects.filter(assigned_to=request.user.id)
-    taskes=Task.objects.filter(assigned_to=request.user)
+    # assets=Asset.objects.filter(assigned_to=request.user.id)
+    # taskes=Task.objects.filter(assigned_to=request.user)
     total_days=(date.today() - record.date_joined.date()).days
+    # attendances=Attendance.objects.filter(employee=request.user.id)
+    # leaves=LeaveApplication.objects.filter(employee=request.user.id)
+    # projects = Project.objects.filter(
+    #     created_by=request.user if request.user.role == 'team_lead' else None
+    # ) or Project.objects.filter(assigned_employees=request.user)
+    
     # join
     # if not assets.exists():
     #     message={
     #         "message":"NO asset is assigned to you"
     #     }
     # print(request.user)
-    if request.user.role == 'team_lead':
-        projects = Project.objects.filter(created_by=request.user)
-    else:
-       projects = Project.objects.filter(assigned_employees=request.user)
+    # if request.user.role == 'team_lead':
+    #     projects = Project.objects.filter(created_by=request.user)
+    # else:
+    #    projects = Project.objects.filter(assigned_employees=request.user)
     # if not projects.exists():
     #     message={
     #         "message":"No Project is assigned to you"
     #     }
-
-    return render(request, 'self_record.html', {"total_days":total_days,'record': record,'assets':assets,"projects":projects,'taskes':taskes})
+    context={
+        "total_days":total_days,'record': record,
+        # 'assets':assets,"projects":projects,
+        # 'taskes':taskes,'attendances':attendances,
+        # "leaves":leaves,
+        }
+    return render(request, 'self_record.html',context)
 
 
 
@@ -124,7 +180,7 @@ def create_account(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('django-login')  # Redirect to login page after successful account creation
+            return redirect('django-login')  
     else:
         form = CustomUserCreationForm()
     return render(request, 'create_account.html', {'form': form})
@@ -136,7 +192,7 @@ def edit_user(request, user_id):
         if form.is_valid():     
             form.save()
             # Redirect based on the role of the logged-in user
-            return redirect('manage_company_records')
+            return redirect('view_self_record')  
             # if request.user.role == 'admin' or request.user.is_superuser:
             #     return redirect('manage_company_records')
             # elif request.user.role == 'ceo':
@@ -149,7 +205,7 @@ def edit_user(request, user_id):
                 
     else:
         form =CustomUserChangeForm(instance=user)
-    return render(request,'edit_user.html',{'form':form})
+    return render(request,'edit_user.html',{'form':form})  
 
 def delete_user(request,user_id):
     user=get_object_or_404(CustomUser,id=user_id)
