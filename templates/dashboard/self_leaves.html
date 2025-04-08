@@ -1,10 +1,6 @@
 {% extends "dashboard.html" %}
-
-{% block title %}Leave Applications{% endblock %}
-
 {% block content %}
-<div class="container mt-5">
-    <h1 class="mb-4">Leave Applications</h1>
+     <h1 class="mb-4">Leave Applications</h1>
     <a href="{% url 'leave-application-create' %}" class="btn btn-primary mb-3">Apply for Leave</a>
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
@@ -44,5 +40,4 @@
             {% endfor %}
         </tbody>
     </table>
-</div>
-{% endblock %}
+    {% endblock %}

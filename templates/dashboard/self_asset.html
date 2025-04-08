@@ -1,0 +1,39 @@
+{% extends "dashboard.html" %}
+{% block content %}
+    <h2>ASSERTS</h2>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th> asset name</th>
+        <th>serial_number</th>
+        <th>status</th>
+        <th>maintenance_date</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% if assets %}
+            {% for asset in assets %}
+    <tr>
+        <td>{{ asset.name }}</td>
+        <td>{{ asset.serial_number }}</td>
+        <td>{{ asset.status }}</td>
+        <td>{{ asset.maintenance_date }}</td>
+        <td>{{ asset.description }}</td>
+
+    </tr>
+    <!-- {% empty %}
+        <tr>
+            <td colspan="5">No Asset is assigned</td>
+        </tr> -->
+     {% endfor %}
+     
+     <!-- {% else %}
+     <tr>
+        <td colspan="5">No Asset assigned to you Yet</td>
+    </tr>
+    {% endif %} -->
+    </tbody>
+</table>
+
+{% endblock %}

@@ -101,9 +101,9 @@ def task_remarks(request,task_id):
             if request.user.role == 'team_lead':
                return redirect('projects-detail', project_id=task.project.id)
             else:
-                return redirect('view_self_record')
+                return redirect('view_self_taskes')
     else:
         form=TaskRemarkform(instance=task)
-    return render(request,'project_management/task_remark.html',{"form":form})
+    return render(request,'project_management/task_remark.html',{"form":form})   
     
     

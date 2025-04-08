@@ -25,6 +25,9 @@
             </td>
         </tr>
         {% endfor %}
-    </tbody>
+    </tbody>  
 </table>
+<a href="{% url 'assert_category' %}" class="btn btn-secondary">Add assert category</a>
+<a href="{% url 'add_or_assign_asset' %}" class="btn btn-secondary">Move to Assign Asset</a>
+
 {% endblock %}

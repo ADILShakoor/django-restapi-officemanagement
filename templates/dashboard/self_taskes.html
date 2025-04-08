@@ -1,0 +1,45 @@
+{% extends "dashboard.html" %}
+{% block content %}
+    <h2>Tasks assigned you</h2>
+    <table class="table">
+       <thead>
+           <tr>
+                   <th>Task</th>
+                   <th>Descriptions</th>
+                   <th>Project</th>
+                   <th>Status</th>
+                   <th>Weight</th>
+                   <th>Assign TO</th>
+                   <th>Due Date</th>
+                   <th>Image</th>
+           </tr>
+       </thead>
+       <tbody>
+               {% for task in taskes %}
+               <tr>
+                   <td>{{ task.name }}</td>
+                   <td>{{ task.description }}</td>
+                   <td>{{ task.project.name }}</td>
+                   <td><a href="{% url 'task-remarks' task.id %}">{{ task.get_status_display }}</a></td>
+                   <td>{{ task.weight }}</td>
+                   <td>{{task.assigned_to}}</td>
+                   <td>{{ task.due_date }}</td>
+                   <td>
+                       {% if task.image %}
+                       <a href="{{ task.image.url }}" target="_blank">
+                           <img src="{{ task.image.url }}" alt="Task Image" width="50"></a>
+                       {% else %}
+                           No Image
+                       {% endif %}
+                   </td>
+               </tr>
+               {% empty %}
+                <tr>
+               <td colspan="5">No project is assigned</td>
+                </tr>
+            {% endfor %}
+       </tbody>
+   </table>
+    
+   
+   {% endblock%}

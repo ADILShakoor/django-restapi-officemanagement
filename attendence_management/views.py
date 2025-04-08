@@ -28,7 +28,7 @@ def attendance_create(request):
             attendence.employee=request.user
             attendence.company=request.user.company
             attendence.save()
-            return redirect('attendance-list')
+            return redirect('view_self_attendances')  
     else:
         form = AttendanceForm()
     return render(request, 'attendance_management/attendance_form.html', {'form': form})
@@ -69,7 +69,7 @@ def leave_create(request):
             leave.employee=request.user
             leave.status="pending"
             leave.save()
-            return redirect('leave-application-list')
+            return redirect('view_self_leaves')   
     else:
         form = LeaveApplicationForm()
     return render(request, 'attendance_management/leave_application_form.html', {'form': form})

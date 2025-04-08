@@ -1,11 +1,7 @@
 {% extends "dashboard.html" %}
-{% block title %}Attendance Records{% endblock %}
-
 {% block content %}
-<div class="container mt-4">
     <h2 class="mb-4">Attendance Records</h2>
-    <a href="{% url 'attendance-create' %}" class="btn btn-primary mb-3">Mark Attendance</a>
-    
+    <a href="{% url 'attendance-create' %}" class="btn btn-primary mb-3">Mark Attendance</a>  
     <table class="table table-striped">
         <thead class="table-dark">
             <tr>
@@ -30,7 +26,7 @@
                 <td>
                     <a href="{% url 'attendance-update' attendance.id %}" class="btn btn-warning btn-sm">Edit</a>
                     <a href="{% url 'attendance-delete' attendance.id %}" class="btn btn-danger btn-sm">Delete</a>  
-                    <!-- attendance-list -->
+                    
                 </td>
             </tr>
             {% empty %}
@@ -40,5 +36,6 @@
             {% endfor %}
         </tbody>
     </table>
-</div>
-{% endblock %}
+
+   
+    {% endblock%}

@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 from django.db import models
 from my_app.models import CustomUser, Company  # Import User & Company
-
+ 
 # Attendance Model
 class Attendance(models.Model):
     STATUS_CHOICES = [
