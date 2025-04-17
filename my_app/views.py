@@ -10,6 +10,7 @@ from .forms import CustomUserCreationForm ,CustomUserChangeForm
 from project_management.models import Project,Task
 from datetime import date
 from attendence_management.models import Attendance,LeaveType,LeaveApplication
+from document_management.models import EmployeeDocument
 
 # Helper Functions
 
@@ -22,15 +23,15 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                # Redirect based on user role
-                if user.role == 'admin' or user.is_superuser:
-                    return redirect('manage_company_records')
-                elif user.role == 'ceo':
-                    return redirect('manage_company_records')
-                elif user.role == 'team_lead':
-                    return redirect('manage_team_records')
-                elif user.role == 'employee':
+                if user.role != 'employee':
+                    return redirect("home")
+                # elif user.role == 'ceo':
+                #     return redirect('manage_company_records')
+                # elif user.role == 'team_lead':
+                #     return redirect('manage_team_records')
+                else:
                     return redirect('view_self_record')
+                
             else:
                 form.add_error(None,"Invalid username or password.")
     else:
@@ -49,11 +50,25 @@ def is_team_lead(user):
 def is_employee(user):
     return user.role == 'employee'
 
+@login_required
+def home(request):
+    return render(request, 'home.html')
+
+@login_required
+def self_document(request):
+    # print(request.user)
+    documents = EmployeeDocument.objects.filter(employee=request.user)
+    # print(documents)
+    return render(request, 'dashboard/self_document.html', {'documents': documents})
+
+@login_required
+def self_document_detail(request, pk):
+    document = get_object_or_404(EmployeeDocument, pk=pk, company=request.user.company)
+    return render(request, 'dashboard/self_document_detail.html', {'document': document})
+
 # Admin or CEO View for Company Records
 def can_manage_user(request_user, target_user):
-    """
-    Determines if the requesting user can manage the target user based on roles and company.
-    """
+    
     if request_user.role == 'admin':
         return True  # Admin can manage all roles
     elif request_user.role == 'ceo':
@@ -106,10 +121,14 @@ def view_self_asset(request):
     return render(request, 'dashboard/self_asset.html',context)
 
 def view_self_taskes(request):
-    taskes=Task.objects.filter(assigned_to=request.user)
+    project_qs = Project.objects.filter(assigned_employees=request.user)
+    taskes = Task.objects.filter(project__in=project_qs)  
+    # user_project=get_object_or_404(project,project=project)
+    # print(user_project)
+    # taskes=Task.objects.filter(project=project)  
     context={
         'taskes':taskes
-        }
+        }          
     return render(request, 'dashboard/self_taskes.html',context)
 
 def view_self_attendances(request):
@@ -183,7 +202,7 @@ def create_account(request):
             return redirect('django-login')  
     else:
         form = CustomUserCreationForm()
-    return render(request, 'create_account.html', {'form': form})
+    return render(request, 'create_account.html', {'form': form}) 
 
 def edit_user(request, user_id):
     user = get_object_or_404(CustomUser,id=user_id)

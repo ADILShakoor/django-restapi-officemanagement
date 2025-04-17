@@ -32,7 +32,7 @@ class Projectapi(APIView):
 
     def get(self, request):
         user=self.request.user
-        if user.role=="admin" or user.role=="ceo":
+        if user.role=="admin" or user.role=="ceo" or user.role=="team_lead":
            projects = Project.objects.filter(company=user.company)
            paginator = ProjectsPagination()
            search=self.request.query_params.get("search")
@@ -61,7 +61,8 @@ class TaskApi(APIView):
     #     return Response(serializer.data)
     def get(self,request):
            user=self.request.user
-           tasks=Task.objects.filter(company=user.company)
+        #    tasks=Task.objects.filter(company=user.company) 
+           tasks=Task.objects.all()
            paginator=ProjectsPagination()
            paginated_tasks=paginator.paginate_queryset(tasks,request)
            return paginator.get_paginated_response(TaskSerializer(paginated_tasks,many=True).data)

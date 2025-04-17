@@ -8,6 +8,8 @@ django = "*"
 pillow = "*"
 djangorestframework = "*"
 django-filter = "*"
+python-dotenv = "*"
+psycopg = {extras = ["binary"], version = "*"}
 
 [dev-packages]
 

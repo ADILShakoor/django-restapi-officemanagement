@@ -63,7 +63,7 @@ class ProjectSerializer(serializers.Serializer):
         instance.save()
         return instance
 
-
+ 
 class TaskSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(max_length=255)

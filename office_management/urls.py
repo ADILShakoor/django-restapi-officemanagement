@@ -29,6 +29,8 @@ urlpatterns = [
     path("projectAPI/",include("project_mangAPI.urls")),
     path('attendence/', include("attendence_management.urls")),
     path('attendenceAPI/', include("attendence_managementAPI.urls")),
+    path("document-mng/",include('document_management.urls')),
+    path('document-mngAPI/', include('document_managementAPI.urls')),
 ]
 
 if settings.DEBUG:

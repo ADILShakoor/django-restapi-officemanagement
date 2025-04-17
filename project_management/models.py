@@ -25,7 +25,7 @@ class Task(models.Model):
         ('pending', 'Pending'),
         ('in_progress', 'In Progress'),
         ('completed', 'Completed'),
-    ]
+    ] 
     
 
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="tasks")
@@ -33,7 +33,7 @@ class Task(models.Model):
     description = models.TextField()
     assigned_to = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, limit_choices_to={'role': 'employee'})
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-    weight = models.IntegerField( default=1)  # New weight field
+    weight = models.IntegerField( default=1) 
     due_date = models.DateField()
     image = models.ImageField(upload_to='task_images/', blank=True, null=True)  # Task image field
 

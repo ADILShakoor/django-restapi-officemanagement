@@ -6,6 +6,7 @@ from . import views
 urlpatterns = [
     # dashboard
     path('', views.create_account, name='create_account'),
+    path('home/', views.home, name='home'),
     path('dlogin/', views.login_view, name='django-login'),
     path('logout/', views.logout_view, name='logout'),
     path('search/', views.search_users, name='search_users'),
@@ -21,6 +22,9 @@ urlpatterns = [
     path('manage_team_records/', views.manage_team_records, name='manage_team_records'),
     path('view_self_record/', views.view_self_record, name='view_self_record'),
     path('edit/<int:user_id>/',views.edit_user , name="edit_user"),
-    path('delete/<int:user_id>/',views.delete_user , name="delete_user")
+    path('delete/<int:user_id>/',views.delete_user , name="delete_user"),
+    
+    path('view_self_document/', views.self_document, name='self_document'),
+    path('view_self_document/<int:pk>/', views.self_document_detail, name='self-document-detail'),
 
 ]

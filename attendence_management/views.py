@@ -56,7 +56,7 @@ def attendance_delete(request, pk):
 
 @login_required 
 def leave_list(request):
-    leaves = LeaveApplication.objects.all()
+    leaves = LeaveApplication.objects.filter(company=request.user.company)  
     return render(request, 'attendance_management/leave_application_list.html', {'leaves': leaves})
  
 @login_required

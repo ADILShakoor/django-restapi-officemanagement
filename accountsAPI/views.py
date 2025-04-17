@@ -67,7 +67,7 @@ class UserListAPIView(generics.ListAPIView):
     serializer_class = CustomUserSerializer
     permission_classes=[IsAuthenticated] #permissions.IsAuthenticated,
     
-    #Cache the entire view for 10 minutes 
+     
     @method_decorator(cache_page(60 * 10))  
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
@@ -93,7 +93,7 @@ class UserListAPIView(generics.ListAPIView):
 
         else:
             queryset=CustomUser.objects.none() 
-        cache.set(cache_key, queryset, timeout=60 * 10)  # ✅ Cache for 10 minutes
+        cache.set(cache_key, queryset, timeout=60 * 10)  
         return queryset
 
 # api_view(["GET","POST","PUT","PATCH","DELETE"])

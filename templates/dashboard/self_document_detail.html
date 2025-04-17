@@ -1,0 +1,18 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ document.title }}</h2>
+    <p><strong>Type:</strong> {{ document.get_document_type_display }}</p>
+    <p><strong>Expires On:</strong> {{ document.expires_on|default:"N/A" }}</p>
+    <p><strong>Signed:</strong> {{ document.is_signed }}</p>
+    {% if document.signature_link %}
+        <p><strong>Signature Link:</strong> <a href="{{ document.signature_link }}" target="_blank">View</a></p>
+    {% endif %}
+    <p><strong>Notes:</strong> {{ document.notes|linebreaks }}</p>
+    <p><strong>File:</strong> 
+        <a href="{{ document.file.url }}" target="_blank" class="btn btn-sm btn-info">Open</a>
+        <a href="{{ document.file.url }}" download class="btn btn-sm btn-primary">Download</a>
+    </p>
+    <a href="{% url 'self_document' %}" class="btn btn-secondary">Back to List</a>  
+</div>
+{% endblock %} 

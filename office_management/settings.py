@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'project_mangAPI',
     'attendence_management',
     "attendence_managementAPI",
+    "document_management",
+    'document_managementAPI',
 ]
 
 MIDDLEWARE = [
@@ -93,6 +95,35 @@ DATABASES = {
     }
 }
 
+# Neon postgreesql connection string
+# import os
+# from dotenv import load_dotenv
+# from urllib.parse import urlparse, parse_qs
+
+# # Load .env file
+# load_dotenv()
+
+# # Parse database URL
+# tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
+# db_params = parse_qs(tmpPostgres.query)
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': tmpPostgres.path.lstrip('/'),
+#         'USER': tmpPostgres.username,
+#         'PASSWORD': tmpPostgres.password,
+#         'HOST': tmpPostgres.hostname,
+#         'PORT': tmpPostgres.port or 5432,
+#         'OPTIONS': {
+#             'sslmode': db_params.get("sslmode", ["prefer"])[0],
+#         }
+#     }
+# }
+
+# # Optional but recommended for PostgreSQL + poolers (like Neon)
+# CONN_MAX_AGE = 60
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -114,7 +145,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Default setting
 AUTHENTICATION_BACKENDS = [
     'my_app.authentication_backends.CustomUserBackend',
-    'django.contrib.auth.backends.ModelBackend',  # Default backend
+    'django.contrib.auth.backends.ModelBackend',  
 ]
 
 
