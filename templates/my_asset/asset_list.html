@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Asset List</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Assigned To</th>
+            <th>Company</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for asset in assets %}
+        <tr>
+            <td>{{ asset.name }}</td>
+            <td>{{ asset.category.name }}</td>
+            <td>{{ asset.get_status_display }}</td>
+            <td>{{ asset.assigned_to }}</td>
+            <td>{{asset.company.name}}</td>
+            <td>
+                <a href="{% url 'asset_detail' asset.id %}">View</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>  
+</table>
+<a href="{% url 'assert_category' %}" class="btn btn-secondary">Add assert category</a>
+<a href="{% url 'add_or_assign_asset' %}" class="btn btn-secondary">Move to Assign Asset</a>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Team Records{% endblock %}
+
+{% block content %}
+<h2>Team Records</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in records %}
+        <tr>
+            <td>{{ record.username }}</td>
+            <td>{{ record.email }}</td>
+            <td>{{ record.get_role_display }}</td>
+            <td>
+                <a href="{% url 'edit_user' record.id  %}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="{% url 'delete_user' record.id  %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Asset Details{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Asset Details</h2>
+    <div class="card mt-3">
+        <div class="card-header">
+            <h4>{{ asset.name }}</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Category:</strong> {{ asset.category.name }}</p>
+            <p><strong>Status:</strong> {{ asset.get_status_display }}</p>
+            <p><strong>Assigned To:</strong> 
+                {% if asset.assigned_to %}
+                    {{ asset.assigned_to.username }} ({{ asset.assigned_to.get_role_display }})
+                {% else %}
+                    Not Assigned
+                {% endif %}
+            </p>
+            <p><strong>Company:</strong> {{ asset.company.name }}</p>
+            <p><strong>Serial Number:</strong> {{ asset.serial_number }}</p>
+            <p><strong>Purchase Date:</strong> {{ asset.purchase_date }}</p>
+            <p><strong>Value:</strong> ${{ asset.value }}</p>
+            <p><strong>Maintenance Date:</strong> 
+                {% if asset.maintenance_date %}
+                    {{ asset.maintenance_date }}
+                {% else %}
+                    Not Scheduled
+                {% endif %}
+            </p>
+            <p><strong>Description:</strong> {{ asset.description|default:"No description available" }}</p>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'list_assets'  %}" class="btn btn-secondary">Back to Asset List</a>
+            <a href="{% url 'add_or_edit_asset' asset.id %}" class="btn btn-primary">Edit Asset</a>
+            <a href="{% url 'delete_asset' asset.id %}" class="btn btn-danger">Delete Asset</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

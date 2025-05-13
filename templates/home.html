@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="bg-light min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="text-center">
+        <h1 class="display-4">
+            Welcome to 
+            <span class="text-primary fw-bold">{{ request.user.company.name }}</span> 
+            Office Management Portal
+        </h1>
+        <p class="lead mt-3">Streamlining your daily operations and team collaboration.</p>
+    </div>
+</div>
+
+{% endblock %}
+

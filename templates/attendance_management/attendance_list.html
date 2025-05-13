@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Attendance Records{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Attendance Records</h2>
+    <!-- <a href="{% url 'attendance-create' %}" class="btn btn-primary mb-3">Mark Attendance</a> -->
+    
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Employee</th>
+                <th>Date</th>
+                <th>company</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for attendance in attendances %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ attendance.employee.username }}</td>
+                <td>{{ attendance.date }}</td>
+                <td>{{ attendance.company}}</td>
+                <td><span class="badge bg-{% if attendance.status == 'present' %}success{% else %}danger{% endif %}">
+                    {{ attendance.status|title }}</span>
+                </td>
+                <td>
+                    <a href="{% url 'attendance-update' attendance.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'attendance-delete' attendance.id %}" class="btn btn-danger btn-sm">Delete</a>  
+                    <!-- attendance-list -->
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No attendance records found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

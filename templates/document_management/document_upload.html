@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Upload New Document</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Upload</button>
+        <a href="{% url 'document-list' %}" class="btn btn-secondary">Back</a>
+    </form>
+</div>
+{% endblock %}

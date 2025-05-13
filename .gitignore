@@ -1,0 +1,42 @@
+# Python Bytecode Files
+__pycache__/
+*.py[cod]
+
+# Virtual Environment (Pipenv)
+Pipfile.lock
+venv/
+.env
+
+# Django Specific
+db.sqlite3  
+media/      
+staticfiles/ 
+*.log       
+*.pot
+*.pyc
+*.swp
+
+# Django Migrations (only ignore auto-generated cache files, not migrations themselves)
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# Django Secrets & Config Files
+.env
+config/settings_local.py  
+secrets.json  
+
+# REST API Specific (Token Auth, Debugging, etc.)
+drf-yasg/ 
+debug_toolbar/ 
+
+# VS Code and JetBrains IDEs
+.vscode/
+.idea/
+
+# MacOS & Linux System Files
+.DS_Store
+
+
+credentials.json

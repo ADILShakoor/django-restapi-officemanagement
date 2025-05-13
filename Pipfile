@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+pillow = "*"
+djangorestframework = "*"
+django-filter = "*"
+python-dotenv = "*"
+psycopg = {extras = ["binary"], version = "*"}
+git-filter-repo = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
+python_full_version = "3.12.3"

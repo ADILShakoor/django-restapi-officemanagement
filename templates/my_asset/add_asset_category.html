@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Add/Edit Asset Category {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>add Asset Category</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+    <a href="{% url 'add_or_assign_asset' %}" class="btn btn-secondary">Move to Assign Asset</a>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Company Records{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h2>Assign Task to Project: {{ project.name }}</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">Task Name</label>
+            {{ form.name }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            {{ form.description }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Assign To</label>
+            {{ form.assigned_to }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Task Weight</label>
+            {{ form.weight }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Status</label>
+            {{ form.status }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Due Date</label>
+            {{ form.due_date }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Upload Task Image (Optional)</label>
+            {{ form.image }}
+        </div>
+        <button type="submit" class="btn btn-primary">Assign Task</button>
+        <a href="{% url 'assign_task' project.id %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Add Project{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Add Project</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_name" class="form-label">Project Name</label>
+            {{ form.name}}
+        </div>
+        <div class="mb-3">
+            <label for="id_description" class="form-label">Description</label>
+            {{ form.description }}
+        </div>
+        <div class="mb-3">
+            <label for="id_status" class="form-label">Status</label>
+            {{ form.status }}
+        </div>
+        <!-- <div class="mb-3">
+            <label for="id_assigned_employees" class="form-label">Assign Employees</label>
+            {{ form.assigned_employees }}
+        </div> -->
+        <div class="mb-3">
+            <label for="id_start_date" class="form-label">Start Date</label>
+            {{ form.start_date }}
+        </div>
+        <div class="mb-3">
+            <label for="id_end_date" class="form-label">End Date</label>
+            {{ form.end_date }}
+        </div>
+        <button type="submit" class="btn btn-primary">Add Project</button>
+        <a href="{% url 'list_projects' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+    
+</div>
+{% endblock %}

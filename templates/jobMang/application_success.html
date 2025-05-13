@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <title>Application Submitted</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body class="container mt-5">
+    <h3>Thank you for applying!</h3>
+    <p>Your application for <strong>{{ job.title }}</strong> has been successfully submitted.</p>
+    <a href="{% url 'job-list' %}" class="btn btn-primary">Back to Job Listings</a>
+</body>
+</html>

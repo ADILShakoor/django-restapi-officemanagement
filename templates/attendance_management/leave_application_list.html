@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Leave Applications{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Leave Applications</h1>
+    <!-- <a href="{% url 'leave-application-create' %}" class="btn btn-primary mb-3">Apply for Leave</a> -->
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Employee</th>
+                <th>Type</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead> 
+        <tbody>
+            {% for leave in leaves %}
+            <tr>
+                <td>{{ leave.id }}</td>
+                <td>{{ leave.employee.username }}</td>
+                <td>{{ leave.leave_type }}</td>
+                <td>{{ leave.start_date }}</td>
+                <td>{{ leave.end_date }}</td>
+                <td>
+                    <span class="badge {% if leave.status == 'approved' %}bg-success{% elif leave.status == 'rejected' %}bg-danger{% else %}bg-warning{% endif %}">
+                        <a href="{% url 'leave-applications-aprovel' leave.id %}">{{ leave.status|capfirst }}</a>
+                    </span>
+                </td>
+                <td>
+                   
+                    <a href="{% url 'leave-application-update' leave.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'leave-application-delete' leave.id %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center">No leave applications found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "dashboard.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2>Your Documents</h2>
+    <!-- <a href="{% url 'document-upload' %}" class="btn btn-success mb-3">Upload New Document</a> -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Title</th>
+                <th>Expires On</th>
+                <th>Signed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doc in documents %}
+            <tr>
+                <td>{{ doc.get_document_type_display }}</td>
+                <td>{{ doc.title }}</td>
+                <td>{{ doc.expires_on|default:"N/A" }}</td>
+                <td>{% if doc.is_signed %}✔{% else %}❌{% endif %}</td>
+                <td><a href="{% url 'self-document-detail' doc.id %}" class="btn btn-info btn-sm">View</a></td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" class="text-center">No documents Found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Assign Employees{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Your Assigned Tasks</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Project</th>
+                <th>Status</th>
+                <th>Weight</th>
+                <th>Assign TO</th>
+                <th>Due Date</th>
+                <th>Image</th>
+        
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in user_tasks %}
+            <tr>
+                <td>{{ task.name }}</td>
+                <td>{{ task.project.name }}</td>
+                <td><a href="{% url 'task-remarks' task.id %}">{{ task.get_status_display }}</a></td>
+                <td>{{ task.weight }}</td>
+                <td>{{task.assigned_to}}</td>
+                <td>{{ task.due_date }}</td>
+                <td>
+                    {% if task.image %}
+                    <a href="{{ task.image.url }}" target="_blank">
+                        <img src="{{ task.image.url }}" alt="Task Image" width="50"></a>
+                    {% else %}
+                        No Image
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No tasks assigned yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

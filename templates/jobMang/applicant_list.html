@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Job Applicants</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Applicant Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Experience (Years)</th>
+                    <th>Company</th>
+                    <th>Applied Job</th>
+                    <th>Submitted On</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for app in applications %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ app.name }}</td>
+                        <td>{{ app.email }}</td>
+                        <td>{{ app.address }}</td>
+                        <td>{{ app.experience }}</td>
+                        <td>{{ app.company }}</td>
+                        <td>{{ app.job.title }}</td>
+                        <td>{{ app.applied_on|date:"Y-m-d H:i" }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="8" class="text-center">No applications found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div> <a  class="btn btn-secondary mt-3" href="{% url 'create-job' %}">Post new job</a> </div>
+    </div>
+</div>
+{% endblock %}
