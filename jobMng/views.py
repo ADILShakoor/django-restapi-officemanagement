@@ -35,7 +35,7 @@ def create_job(request):
     return render(request, 'jobMang/job_create_form.html', {'form': form})
 
 def applicant_list(request):
-    # Assuming you have a model for job applications
+    
     applications = JobApplication.objects.all()
     return render(request, 'jobMang/applicant_list.html', {'applications': applications})
 

@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'google_calendar_API',
     'google_calendar',
     'jobMng',
+    'jobMngApi',
 ]
 
 MIDDLEWARE = [

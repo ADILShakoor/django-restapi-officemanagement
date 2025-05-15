@@ -86,7 +86,7 @@ class LoginSerializer(serializers.Serializer):
 
         token, created = Token.objects.get_or_create(user=user)
 
-        # Set token in cookies
+        
         self.context['response'].set_cookie(
             key="auth_token",
             value=token.key,

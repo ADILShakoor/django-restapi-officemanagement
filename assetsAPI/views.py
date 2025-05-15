@@ -65,13 +65,13 @@ class AssertView(viewsets.ViewSet):
         return Response(serializer.data)
     
     def retrieve(self,request,pk=None):
-        # retrieve single asset if id exits  
+          
         asset=get_object_or_404(Asset,id=pk)
         serializer= AssetSerializer(asset,many=False)
         return Response(serializer.data)
     
     def create(self,request):
-        #make POST call to create new resource 
+       
         serializer=AssetSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

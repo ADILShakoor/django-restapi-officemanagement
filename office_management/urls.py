@@ -34,6 +34,7 @@ urlpatterns = [
     path('', include('google_calendar_API.urls')),
     path('', include('google_calendar.urls')),  # calendar/
     path('jobMang/', include('jobMng.urls')),
+    path('jobMangApi/', include('jobMngApi.urls')),
 ]
 
 if settings.DEBUG:
